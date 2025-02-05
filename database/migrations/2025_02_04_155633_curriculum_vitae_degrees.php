@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CurriculumVitae;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +14,25 @@ return new class extends Migration
     {
         Schema::create('curriculum_vitae_degrees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('curriculum_vitae_id');
-            $table->index('curriculum_vitae_id');
-            $table->string('degree');
-            $table->string('starting_month');
+            $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
+            $table->string('title');
+            $table->enum('starting_month', [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'
+            ]);
             $table->year('starting_year');
             $table->year('finished_year')->nullable();
-            $table->string('finished_month')->nullable();
+            $table->enum('finished_month', [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'
+            ])->nullable();
             $table->boolean('is_finished')->default(false);
             $table->string('institution');
-            $table->string('department');
+            $table->string('department')->nullable();
+            $table->string('board')->nullable();
+            $table->tinyInteger('duration')->nullable();
+            $table->string('grade');
+            $table->string('total_grade');
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CurriculumVitae;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,15 +14,22 @@ return new class extends Migration
     {
         Schema::create('curriculum_vitae_work_experiences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('curriculum_vitae_id');
-            $table->index('curriculum_vitae_id');
+            $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
             $table->string('position');
             $table->string('company');
+            $table->string('company_url')->nullable();
+            $table->string('company_address')->nullable();
             $table->string('description');
-            $table->string('starting_month');
+            $table->enum('starting_month', [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'
+            ]);
             $table->year('starting_year');
             $table->year('finished_year')->nullable();
-            $table->string('finished_month')->nullable();
+            $table->enum('finished_month', [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'
+            ])->nullable();
             $table->boolean('is_finished')->default(false);
         });
     }

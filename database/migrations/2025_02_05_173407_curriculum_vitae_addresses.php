@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\CurriculumVitae;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('curriculum_vitae_researches', function (Blueprint $table) {
+        Schema::create('curriculum_vitae_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
-            $table->string('published_month');
-            $table->year('published_year');
-            $table->string('title');
-            $table->text('description');
+            $table->string('address');
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country');
+            $table->string('nationality');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('curriculum_vitae_researches');
+        Schema::dropIfExists('curriculum_vitae_addresses');
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CurriculumVitae;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('curriculum_vitae_id');
+            $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
             $table->index('curriculum_vitae_id');
-            $table->string('skill_name');
+            $table->string('skill_name')->unique();
         });
     }
 
