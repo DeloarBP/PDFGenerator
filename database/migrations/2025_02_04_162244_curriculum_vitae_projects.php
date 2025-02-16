@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
+            $table->string('url')->nullable();
         });
     }
 
