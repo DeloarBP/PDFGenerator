@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('curriculum_vitae_degrees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
+            $table->foreignId('curriculum_vitae_id')->constrained('curriculum_vitaes')->cascadeOnDelete();
             $table->string('title');
             $table->enum('starting_month', [
                 'January', 'February', 'March', 'April', 'May', 'June', 'July',

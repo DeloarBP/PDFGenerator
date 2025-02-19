@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('position')->comment('Position(i.e Marketing Manager, Software Engineer, etc.)');
             $table->text('summary');
             $table->timestamps();
-            $table->foreignId('user_id')->constrained(User::class)->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->softDeletes();
         });
     }

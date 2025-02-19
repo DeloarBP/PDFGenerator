@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('curriculum_vitae_addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('curriculum_vitae_id')->constrained(CurriculumVitae::class)->cascadeOnDelete();
+            $table->foreignId('curriculum_vitae_id')->constrained('curriculum_vitaes')->cascadeOnDelete();
             $table->string('address');
             $table->string('street')->nullable();
             $table->string('city')->nullable();
