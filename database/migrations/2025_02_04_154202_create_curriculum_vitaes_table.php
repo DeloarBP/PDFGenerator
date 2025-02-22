@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('curriculum_vitaes', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('position')->comment('Position(i.e Marketing Manager, Software Engineer, etc.)');
             $table->text('summary');
             $table->timestamps();

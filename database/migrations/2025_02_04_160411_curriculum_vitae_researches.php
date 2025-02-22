@@ -15,7 +15,10 @@ return new class extends Migration
         Schema::create('curriculum_vitae_researches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curriculum_vitae_id')->constrained('curriculum_vitaes')->cascadeOnDelete();
-            $table->string('published_month');
+            $table->enum('published_month', [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'
+            ]);
             $table->year('published_year');
             $table->string('title');
             $table->text('description');
